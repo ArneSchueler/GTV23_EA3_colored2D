@@ -2,18 +2,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>GTV23 EA1 geometry from lines</title>
+<title>GTV23 EA3 geometry from traingles</title>
 <link rel="stylesheet" href="main.css">
+<script src="triangles.js"></script>
+<script src="colorPicker.js"></script>
+
+
 </head>
-<body>
+<body onload="createTriangles()">
 	<canvas id="canvas" width="600px" height="600px" >
 	</canvas>
-	
-	<div class="info">
+		
+	<div class="info" id="info">
 		<p class="content">
-			A 2D Geometry made from lines for the module Graphical Visualisation Technologies (BHT MIM 20 W23).<br>
+			A 2D Geometry made from triangles for the module Graphical Visualisation Technologies (BHT MIM 20 W23).<br>
 			<br>
-
 		</p>
 		<p class="sources">
 			Sources:<br>
@@ -21,93 +24,5 @@
 		</p>
 	</div>
 	
-	<script type="text/javascript">
-            var canvas = document.getElementById('canvas');
-             var gl = canvas.getContext('experimental-webgl');
-             gl.clearColor(0.263, 0.749, 0.678, 1);
-             
-             //compile vertex shader
-             var vsSource = 'attribute vec2 pos;' +
-             	'void main(){gl_Position = vec4(pos*0.25, 0, 1);}';
-             var vs = gl.createShader(gl.VERTEX_SHADER);
-             gl.shaderSource(vs, vsSource);
-             gl.compileShader(vs);
-             
-             //compile FragmentShader
-             
-             var fsSource = 'void main(){gl_FragColor = vec4(1);}';
-             var fs = gl.createShader(gl.FRAGMENT_SHADER);
-             gl.shaderSource(fs, fsSource);
-             gl.compileShader(fs);
-             
-             //Link togehter into programm
-             var prog = gl.createProgram();
-             gl.attachShader(prog, vs);
-             gl.attachShader(prog, fs);
-             gl.linkProgram(prog);
-             gl.useProgram(prog);
-             
-             //load vertex data into buffer
-	         //vertices for 2d geometry (lines)
-             var vertices = new Float32Array(
-				 [0,0,
-				 0.8,-0.8,
-				 1, -0.8, 
-				 2,0,
-				 2.9,0.9,	
-				 3.5,1.6,
-				 1,0.75,
-				 0,0,
-				 3,1,
-				 0,0,
-				 0.4, 0.3,
-				 0.2, 0.5,
-				 0.2,1,
-				 -0.1,1.35,
-				 -0.75,1.35,
-				 -1.9,1.5,
-				 -0.75,1,
-				 -0.75,1.35,
-				 -0.75,1,
-				 -0.5,0,
-				 0.2, 0.5,
-				 -0.5,0,
-				 -0.5,-0.5,
-				 0,-1.1,
- 				 0.25,-1.35,
-				 0,-1.1,
-				 0.05,-1.25,
-				 -0.05,-1.5,
-				 0.15,-1.75,
-				 0.1, -1.5,
-				 -0.05,-1.5,
-				 0.25,-1.35,
-				 0.65,-1.6,
-				 1.5,-2,
-				 0.65,-1.6,
-				 1.5,-2.35,
-				 2,-2.9,
-				 2.07, -2.65,
-				 1.45,-1.75,
-				 1.5,-2,
-				 1.45,-1.75,
-				 1,-1,
-				 1, -0.8		 		 
- 				]);
- 				
-             var vbo = gl.createBuffer();
-             gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
-             gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
-             
-             //bind vertex Buffer to attribute variable
-             var posAttrib = gl.getAttribLocation(prog, 'pos');
-             gl.vertexAttribPointer(posAttrib,2, gl.FLOAT, false, 0, 0);
-             gl.enableVertexAttribArray(posAttrib);
-             
-             //Clear framebuffer and render primitives
-             gl.clear(gl.COLOR_BUFFER_BIT);
-             gl.drawArrays(gl.LINE_STRIP,0, 43);
-             
-         </script>
 </body>
 </html>
